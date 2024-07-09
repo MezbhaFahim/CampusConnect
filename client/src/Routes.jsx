@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Homepage from './Homepage/Homepage.jsx';
-import SignupSignin from './AuthenticationPages/SignupSignin.jsx';
-import LoggedinHome from './Homepage/LoggedinHome.jsx';
-import LoggedinBusRoutes from './ParkingTransportation/Transportation/LoggedinBusRoutes.jsx';
-import BusRoutes from './ParkingTransportation/Transportation/BusRoutes.jsx';
+import Homepage from './Homepage/Homepage';
+import SignupSignin from './AuthenticationPages/SignupSignin';
+import LoggedinHome from './Homepage/LoggedinHome';
+import LoggedinBusRoutes from './ParkingTransportation/Transportation/LoggedinBusRoutes';
+import BusRoutes from './ParkingTransportation/Transportation/BusRoutes';
+import BusBook from './ParkingTransportation/Transportation/BusBooking';
+import BusTicket from './ParkingTransportation/Transportation/BusTicket';
 
 
 function AppRoutes() {
@@ -16,6 +18,8 @@ function AppRoutes() {
         <Route path="/Home" element={<LoggedinHome />} />
         <Route path="/BusRoutes" element={<LoggedinBusRoutes />} />
         <Route path="/BusRoutes-Signout" element={<BusRoutes />} />
+        <Route path="/BusBook" element={<BusBook />} />
+        <Route path="/BusTicket" element={<BusTicket />} />
         
       </Routes>
     </Router>
