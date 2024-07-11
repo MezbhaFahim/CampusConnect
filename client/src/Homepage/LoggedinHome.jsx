@@ -12,17 +12,17 @@ function LoggedinHome() {
           <ul className={style["menu-links"]}>
             <span id="close-menu-btn" className="material-symbols-outlined">close</span>
             <li>
-              <a href="/routine">Routine</a>
+              <a href="#">Routine</a>
             </li>
             <li>
-              <a href="/cafetaria">Cafetaria</a>
+              <a href="#">Cafetaria</a>
             </li>
             <li>
               <a href="#">Transportation</a>
               <ul className={style["dropdown-menu"]}>
-                <li><a href="/bus-routes-in">Bus Routes</a></li>
-                <li><a href="/bus-book">Book Seats</a></li>
-                <li><a href="/bus-ticket">Buy Tickets</a></li>
+                <li><a href="/BusRoutes">Bus Routes</a></li>
+                <li><a href="/BusBook">Book Seats</a></li>
+                <li><a href="/BusTicket">Buy Tickets</a></li>
               </ul>
             </li>
             <li>
@@ -34,10 +34,10 @@ function LoggedinHome() {
               </ul>
             </li>
             <li>
-              <a href="/StudentForum">Student Forum</a>
+              <a href="#">Student Forum</a>
             </li>
             <li>
-              <a href="/userProfile">MyProfile</a>
+              <a href="/UserProfile">MyProfile</a>
             </li>
           </ul>
           <span id="hamburger-btn" className="material-symbols-outlined">menu</span>

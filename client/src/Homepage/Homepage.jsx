@@ -17,12 +17,12 @@ function Homepage() {
           <ul className={style["menu-links"]}>
             <span id="close-menu-btn" className="material-symbols-outlined">close</span>
             <li>
-              <a href="/routine">Routine</a>
+              <a href="#">Routine</a>
             </li>
             <li>
               <a href="#">Transportation</a>
               <ul className={style["dropdown-menu"]}>
-                <li><a href="/bus-routes">Bus Routes</a></li>
+                <li><a href="/BusRoutes">Bus Routes</a></li>
               </ul>
             </li>
           </ul>
