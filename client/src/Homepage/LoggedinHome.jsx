@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Homepage.module.css';
+import style from './LoggedinHome.module.css';
 
 function LoggedinHome() {
 

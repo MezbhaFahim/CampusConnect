@@ -335,3 +335,115 @@ exports.getParkingInfo = async (req, res) => {
       res.status(500).send('Internal server error');
   }
 };
+
+//Routine Stuff
+
+exports.CourseFetch = async (req, res) => {
+  db.query('SELECT CourseName, Time, Section, Day1, Day2 FROM courses', (error, results) => {
+
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send('No Courses Found!.');
+    }
+
+    const userData = results;
+    res.send(userData);
+
+  });
+};
+
+exports.CourseSelected = async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user.Username) {
+      return res.status(401).send("User is not logged in");
+    }
+    const { courseDetails } = req.body;
+    const username = req.session.user.Username;
+
+    db.query("SELECT * FROM usercoursetable WHERE Username = ? AND CourseName = ?", [username, courseDetails.courseName], (error, results) => {
+        if (error) {
+          console.error("Database error:", error);
+          return res.status(500).send("Internal server error");
+        }
+        if (results.length > 0) {
+          return res.status(404).send("You have taken this course");
+        } else {
+          db.query(
+            "INSERT INTO usercoursetable SET ?", {Username: username, CourseName: courseDetails.courseName, CourseSection: courseDetails.section}, (insertError, insertResults) => {
+              if (insertError) {
+                console.error("Database insert error:", insertError);
+                return res.status(500).send("Internal server error");
+              }
+              return res.status(200).send("Course selection successful");
+            }
+          );
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Error in CourseSelected:", error);
+    return res.status(500).send("Internal server error");
+  }
+};
+
+exports.removeCoursefromdatabase = async(req, res) => {
+  const courseDescription = req.body
+  const courseName = courseDescription.courseName
+  const courseSection = courseDescription.section
+  const username = req.session.user.Username;
+  db.query( `DELETE FROM usercoursetable WHERE Username = ? AND CourseName = ? AND CourseSection = ?` , [username, courseName, courseSection], (error, results) => {
+    if (error) {
+        return res.status(500).send('Internal server error');
+    } else {
+      res.redirect('/Routine')
+    }
+  
+  });
+}
+
+exports.CourseShowRoutine = async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user.Username) {
+      return res.status(401).send("User is not logged in");
+    }
+    const username = req.session.user.Username;
+    const results = await new Promise((resolve, reject) => {
+      db.query('SELECT * FROM usercoursetable WHERE Username = ?', [username], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    const courseNamesList = results.map(row => ({ courseName: row.CourseName, courseSection: row.CourseSection }));
+    const courseDetails = [];
+
+    for (let i = 0; i < courseNamesList.length; i++) {
+      const courseName = courseNamesList[i]['courseName'];
+      const courseSection = courseNamesList[i]['courseSection'];
+
+      const courseResults = await new Promise((resolve, reject) => {
+        db.query('SELECT * FROM courses WHERE CourseName = ? AND Section = ?', [courseName, courseSection], (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+
+      courseDetails.push(courseResults);
+    }
+    res.send(courseDetails);
+
+  } catch (error) {
+    console.error("Error in CourseShowRoutine:", error);
+    return res.status(500).send("Internal server error");
+  }
+};

@@ -10,12 +10,11 @@ function Homepage() {
   };
 
   return (
-        <div>
+    <div>
       <header>
         <nav className={style["navbar"]}>
           <a className={style["logo"]} href="#">CampusConnect<span>.</span></a>
           <ul className={style["menu-links"]}>
-            <span id="close-menu-btn" className="material-symbols-outlined">close</span>
             <li>
               <a href="#">Routine</a>
             </li>
@@ -26,7 +25,6 @@ function Homepage() {
               </ul>
             </li>
           </ul>
-          <span id="hamburger-btn" className="material-symbols-outlined">menu</span>
         </nav>
       </header>
 

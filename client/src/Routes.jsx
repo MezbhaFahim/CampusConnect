@@ -7,6 +7,7 @@ import BusRoutes from './ParkingTransportation/BusRoutes';
 import BusBook from './ParkingTransportation/BusBooking';
 import BusTicket from './ParkingTransportation/BusTicket';
 import BookParking from './ParkingTransportation/BookParking';
+import Routine from './Routine/Routine';
 
 import UserProfile from './User/UserProfile';
 import UserUpdate from './User/UserUpdate';
@@ -25,6 +26,8 @@ function AppRoutes() {
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/UserUpdate" element={<UserUpdate />} />
         <Route path="/BookParking" element={<BookParking />} />
+        <Route path="/Routine" element={<Routine />} />
+
         
       </Routes>
     </Router>
