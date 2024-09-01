@@ -12,17 +12,17 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0px;
+
+  z-index: 1000;
 }
 
 header .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   max-width: 1200px;
-  margin: 0 auto;
-  margin-top: -35px;
-  margin-left: -7px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .navbar .logo {
@@ -37,10 +37,17 @@ header .navbar {
 }
 
 .navbar .menu-links {
-  margin-left: 700px;
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: -700px;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-links li {
+  position: relative;
+  width: 100%;
 }
 
 .menu-links .dropdown-menu {
@@ -49,24 +56,25 @@ header .navbar {
   visibility: hidden;
   transition: max-height 1s ease;
   position: absolute;
-  background-color: #24242463; 
+  background-color: #24242463;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.616);
-  padding: 10px 0; 
-  z-index: 1; 
+  padding: 10px 0;
+  z-index: 1000;
   text-align: left;
   font-size: 15px;
+  width: 200px;
 }
 
 .menu-links .dropdown-menu a {
   display: block;
   padding: 10px 20px;
-  color: #fff; 
+  color: #fff;
   text-decoration: none;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .menu-links .dropdown-menu a:hover {
-  background-color: #333; 
+  background-color: #333;
 }
 
 .menu-links li:hover .dropdown-menu {
@@ -111,12 +119,14 @@ header .navbar {
   font-size: 3rem;
   max-width: 600px;
   line-height: 70px;
+  color: #fff !important;
 }
 
 .hero-section .content p {
   font-weight: 300;
   max-width: 600px;
   margin-top: 15px;
+  color: #fff !important;
 }
 
 .hero-section .content button {
