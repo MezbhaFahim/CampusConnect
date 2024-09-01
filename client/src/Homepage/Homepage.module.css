@@ -49,10 +49,10 @@ header .navbar {
   visibility: hidden;
   transition: max-height 1s ease;
   position: absolute;
-  background-color: #24242463; 
+  background-color: #24242463;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.616);
-  padding: 10px 0; 
-  z-index: 1; 
+  padding: 10px 0;
+  z-index: 1;
   text-align: left;
   font-size: 15px;
 }
@@ -60,13 +60,13 @@ header .navbar {
 .menu-links .dropdown-menu a {
   display: block;
   padding: 10px 20px;
-  color: #fff; 
+  color: #fff;
   text-decoration: none;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .menu-links .dropdown-menu a:hover {
-  background-color: #333; 
+  background-color: #333;
 }
 
 .menu-links li:hover .dropdown-menu {
@@ -111,12 +111,14 @@ header .navbar {
   font-size: 3rem;
   max-width: 600px;
   line-height: 70px;
+  color: #fff !important;
 }
 
 .hero-section .content p {
   font-weight: 300;
   max-width: 600px;
   margin-top: 15px;
+  color: white !important;
 }
 
 .hero-section .content button {

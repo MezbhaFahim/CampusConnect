@@ -10,7 +10,6 @@ function LoggedinHome() {
         <nav className={style["navbar"]}>
           <a className={style["logo"]} href="#">CampusConnect<span>.</span></a>
           <ul className={style["menu-links"]}>
-            <span id="close-menu-btn" className="material-symbols-outlined">close</span>
             <li>
               <a href="#">Routine</a>
             </li>
@@ -40,7 +39,6 @@ function LoggedinHome() {
               <a href="/UserProfile">MyProfile</a>
             </li>
           </ul>
-          <span id="hamburger-btn" className="material-symbols-outlined">menu</span>
         </nav>
       </header>
 
