@@ -1,158 +1,203 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import style from './BookParking.module.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import parkingBackground from "./parking-background.jpg";
+import styles from "./BookParking.module.css";
 
-function BookParking() {
-    const [formData, setFormData] = useState({
-        name: '',
-        lic_plate: '',
-        student_id: '',
-        type: 'car',
-    });
-    const [parkedCars, setParkedCars] = useState([]);
-    const [availableSpace, setAvailableSpace] = useState(10);
-    const [errors, setErrors] = useState({});
+function ParkingForm() {
+  const [userData, setUserData] = useState({
+    StudentName: "",
+    StudentID: "",
+    Phone: "",
+  });
+  const [parkingInfo, setParkingInfo] = useState([]);
+  const [status, setStatus] = useState({
+    parkedCars: 0,
+    availableSpace: 10,
+  });
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-            const userDataResponse = await axios.get('/auth/api/auth');
-            const userData = userDataResponse.data[0];
-            setFormData({
-                ...formData,
-                name: userData.StudentName,
-                student_id: userData.StudentID,
-            });
+      try {
+        const userDataResponse = await axios.get("/auth/api/auth");
+        const parkingInfoResponse = await axios.get("/auth/parkingInfo");
+        const parkingStatusResponse = await axios.get("/auth/parkingStatus");
 
-            const parkingInfoResponse = await axios.get('/auth/parkingInfo');
-            setParkedCars(parkingInfoResponse.data);
-
-            const response = await axios.get('/auth/parkingStatus');
-            const { parkedCars, availableSpace } = response.data;
-            setAvailableSpace(availableSpace);
-
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+        setUserData(userDataResponse.data[0]);
+        setParkingInfo(parkingInfoResponse.data);
+        setStatus(parkingStatusResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+    fetchData();
+  }, []);
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('/auth/parking', formData);
-            if (response.data.success) {
-                fetchData();
-                setFormData({
-                    name: '',
-                    lic_plate: '',
-                    student_id: '',
-                    type: 'car',
-                });
-            } else {
-                setErrors(response.data.errors);
-            }
-        } catch (error) {
-            console.error('Error booking parking slot:', error);
-        }
-    };
+  // Inline background style
+  const backgroundStyle = {
+    backgroundImage: `
+            linear-gradient(
+                rgba(260, 255, 255, 0.5), 
+                rgba(260, 255, 255, 0.5)
+            ), 
+            url(${parkingBackground})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+    minHeight: "100vh",
+    width: "100%",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -1,
+  };
 
-    return (
-        <>
-            <nav className={`navbar navbar-expand-lg ${style.navbar}`}>
-                <div className="container-fluid">
-                    <a className={`navbar-brand ${style['navbar-brand']}`} href="#" id="nav-link">
-                        <svg viewBox="0 0 24 24" width="57px" height="57px" fill="yellow" xmlns="http://www.w3.org/2000/svg">
-                            {/* SVG content */}
-                        </svg>
-                        Parking - Book Slot
-                    </a>
+  return (
+    <div style={backgroundStyle}>
+      <nav className={styles.navbar}>
+        <div className={styles.containerFluid}>
+          <h1 className={styles.navbarBrand}>Parking - Book Slot</h1>
+        </div>
+      </nav>
+
+      <div className={styles.container}>
+        <div className={styles.row}>
+          <div className={styles.colLg6}>
+            <div className={styles.dFlex}>
+              <form
+                action="/auth/parking"
+                method="POST"
+                className={styles.form}
+              >
+                <div className={styles.mb3}>
+                  <label htmlFor="name" className={styles.formLabel}>
+                    <i className="bi bi-person"></i>&ensp;Fullname
+                  </label>
+                  <input
+                    type="text"
+                    className={styles.formControl}
+                    id="name"
+                    name="name"
+                    value={userData.StudentName}
+                    onChange={(e) =>
+                      setUserData({ ...userData, StudentName: e.target.value })
+                    } // Update state on change
+                  />
                 </div>
-            </nav>
-
-            <div className="container mt-5">
-                <div className="row">
-                    <div className="col-lg-6 col-sm-12 mb-3">
-                        <div className="d-flex justify-content-center">
-                            <form onSubmit={handleFormSubmit}>
-                                <div className="mb-3">
-                                    <label htmlFor="name" className={`form-label ${style['form-label']}`}><i className="bi bi-person"></i>&ensp;Fullname</label>
-                                    <input type="text" className={`form-control ${style['form-control']}`} id="name" name="name" value={formData.name} onChange={handleInputChange} />
-                                    {errors.name && <div><p id="nameError">{errors.name}</p></div>}
-                                </div>
-                                
-                                <div className="mb-3">
-                                    <label htmlFor="plate" className={`form-label ${style['form-label']}`}><i className="fa fa-list-alt" aria-hidden="true"></i>&ensp;License Plate</label>
-                                    <input type="text" className={`form-control ${style['form-control']}`} id="plate" name="lic_plate" value={formData.lic_plate} onChange={handleInputChange} />
-                                    {errors.lic_plate && <div><p id="plateError">{errors.lic_plate}</p></div>}
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="studentId" className={`form-label ${style['form-label']}`}><i className="bi bi-card-id"></i>&ensp;Student ID</label>
-                                    <input type="text" className={`form-control ${style['form-control']}`} id="studentId" name="student_id" value={formData.student_id} onChange={handleInputChange} />
-                                    {errors.student_id && <div><p id="studentIdError">{errors.student_id}</p></div>}
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="model" className={`form-label ${style['form-label']}`}><i className="lni lni-car-alt"></i>&ensp;Vehicle Type</label>
-                                    <select className={`form-select ${style['form-select']}`} id="vehicleType" name="type" value={formData.type} onChange={handleInputChange}>
-                                        <option value="car">Car</option>
-                                        <option value="bike">Bike</option>
-                                    </select>
-                                    {errors.type && <div><p id="vehicleTypeError">{errors.type}</p></div>}
-                                </div>
-                                <button type="submit" id="btn1" className={`btn btn-warning ${style.btn}`}>Book!</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-sm-12">
-                        <div className={`box-container d-flex justify-content-between ${style['box-container']}`}>
-                            <div className={`box ${style.box}`}>
-                                <h4 style={{ color: '#007BFF' }}>Parked Cars</h4>
-                                <p id="parkedCarsCount" style={{ color: '#007BFF' }}>{parkedCars.length}</p>
-                            </div>
-                            <div className={`box ${style.box}`}>
-                                <h4 style={{ color: '#007BFF' }}>Available Space</h4>
-                                <p id="availableSpaceCount" style={{ color: '#007BFF' }}>{availableSpace}</p>
-                            </div>
-                        </div>
-
-                        <table className={`table table-borderless mt-5 ${style.table}`}>
-                            <thead>
-                                <p id="parkingHead" className={style.parkingHead}><i className="fa fa-product-hunt" aria-hidden="true"></i>&ensp;Parked Cars</p>
-                                <tr>
-                                    <th scope="col" id="id">Student Id</th>
-                                    <th scope="col" id="namE">Name</th>
-                                    <th scope="col" id="platE">Plate</th>
-                                    <th scope="col" id="modeL">Type</th>
-                                    <th scope="col" id="arrivaltimE">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="parkingtable">
-                                {parkedCars.map((car, index) => (
-                                    <tr key={index}>
-                                        <td>{car.student_id}</td>
-                                        <td>{car.name}</td>
-                                        <td>{car.lic_plate}</td>
-                                        <td>{car.type}</td>
-                                        <td>{car.status}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                <div className={styles.mb3}>
+                  <label htmlFor="phone" className={styles.formLabel}>
+                    <i className="bi bi-phone"></i>&ensp;Phone Number
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    className={styles.formControl}
+                    id="phone"
+                    name="phoneNo"
+                    value={userData.Phone}
+                    onChange={(e) =>
+                      setUserData({ ...userData, Phone: e.target.value })
+                    } // Update state on change
+                  />
                 </div>
+                <div className={styles.mb3}>
+                  <label htmlFor="plate" className={styles.formLabel}>
+                    <i className="fa fa-list-alt" aria-hidden="true"></i>
+                    &ensp;License Plate
+                  </label>
+                  <input
+                    type="text"
+                    className={styles.formControl}
+                    id="plate"
+                    name="lic_plate"
+                  />
+                </div>
+                <div className={styles.mb3}>
+                  <label htmlFor="studentId" className={styles.formLabel}>
+                    <i className="bi bi-card-id"></i>&ensp;Student ID
+                  </label>
+                  <input
+                    type="text"
+                    className={styles.formControl}
+                    id="studentId"
+                    name="student_id"
+                    value={userData.StudentID}
+                    onChange={(e) =>
+                      setUserData({ ...userData, StudentID: e.target.value })
+                    } // Update state on change
+                  />
+                </div>
+                <div className={styles.mb3}>
+                  <label htmlFor="model" className={styles.formLabel}>
+                    <i className="lni lni-car-alt"></i>&ensp;Vehicle Type
+                  </label>
+                  <select
+                    className={styles.formSelect}
+                    id="vehicleType"
+                    name="type"
+                  >
+                    <option value="car">Car</option>
+                    <option value="bike">Bike</option>
+                  </select>
+                </div>
+                <button type="submit" className={styles.btnWarning}>
+                  Book!
+                </button>
+              </form>
             </div>
-        </>
-    );
+          </div>
+          <div className={styles.colLg6}>
+            <div className={styles.boxContainer}>
+              <div className={styles.box}>
+                <h4>Parked Cars</h4>
+                <p className={styles.parkedCarsCount}>{status.parkedCars}</p>
+              </div>
+              <div className={styles.box}>
+                <h4>Available Space</h4>
+                <p className={styles.availableSpaceCount}>
+                  {status.availableSpace}
+                </p>
+              </div>
+            </div>
+
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th scope="col" className={styles.id}>
+                    Student Id
+                  </th>
+                  <th scope="col" className={styles.namE}>
+                    Name
+                  </th>
+                  <th scope="col" className={styles.platE}>
+                    Plate
+                  </th>
+                  <th scope="col" className={styles.modeL}>
+                    Type
+                  </th>
+                  <th scope="col" className={styles.arrivaltimE}>
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className={styles.parkingtable}>
+                {parkingInfo.map((info) => (
+                  <tr key={info.student_id}>
+                    <td>{info.student_id}</td>
+                    <td>{info.name}</td>
+                    <td>{info.lic_plate}</td>
+                    <td>{info.type}</td>
+                    <td>{info.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default BookParking;
+export default ParkingForm;
