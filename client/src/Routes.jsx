@@ -11,6 +11,11 @@ import Routine from './Routine/Routine';
 
 import UserProfile from './User/UserProfile';
 import UserUpdate from './User/UserUpdate';
+import ParkingBooking from './ParkingTransportation/Parkingbooking';
+
+
+
+
 
 
 function AppRoutes() {
@@ -27,6 +32,10 @@ function AppRoutes() {
         <Route path="/UserUpdate" element={<UserUpdate />} />
         <Route path="/BookParking" element={<BookParking />} />
         <Route path="/Routine" element={<Routine />} />
+        <Route path="/ParkingBooking" element={<ParkingBooking />} />
+
+
+
 
         
       </Routes>

@@ -279,25 +279,29 @@ exports.parking = (req, res) => {
   });
 };
 
-exports.getLicensePlate = (req, res) => {
+// Backend logging
 
-  const { studentId } = req.query; 
+exports.getLicensePlate = (req, res) => {
+  const { studentId } = req.query;
   const query = 'SELECT lic_plate FROM parking_ver1 WHERE student_id = ?';
 
   db.query(query, [studentId], (err, results) => {
       if (err) {
           console.error('Error fetching license plate:', err);
-          res.status(500).json({ error: 'Internal Server Error' });
+          return res.status(500).json({ error: 'Internal Server Error' });
       }
-
       if (results.length === 0) {
-          res.status(404).json({ error: 'License plate not found for the given student ID' });
+          return res.status(404).json({ error: 'License plate not found for the given student ID' });
       }
-
+      
       const licensePlate = results[0].lic_plate;
+      console.log('License Plate from DB:', licensePlate); 
       res.json({ licensePlate }); 
   });
 };
+
+
+
 
 exports.getParkingStatus = async (req, res) => {
 
@@ -335,6 +339,57 @@ exports.getParkingInfo = async (req, res) => {
       res.status(500).send('Internal server error');
   }
 };
+
+
+exports.proceedToCheckout = async (req, res) => {
+
+  const { transactionID, studentID } = req.body;
+  try {
+
+    db.query('SELECT * FROM transactions_table WHERE transactions = ?', [transactionID], (error, result) => {
+
+      if (error) {
+        console.error('Error during checkout:', error);
+        return res.status(500).send('Error during checkout');
+      }
+
+      if (result.length > 0) {
+
+        db.query('UPDATE transactions_table SET student_id = ? WHERE transactions = ?', [studentID, transactionID], (updateError, updateResult) => {
+          if (updateError) {
+            console.error('Error during update:', updateError);
+            return res.status(500).send('Error during update');
+          }
+
+          db.query('SELECT * FROM parking_ver1 WHERE student_id = ?', [studentID], (parkingError, parkingResult) => {
+            if (parkingError) {
+              console.error('Error fetching parking details:', parkingError);
+              return res.status(500).send('Error fetching parking details');
+            }
+
+            if (parkingResult.length > 0) {
+              db.query('UPDATE parking_ver1 SET status = "Paid" WHERE student_id = ?', [studentID], (parkingUpdateError, parkingUpdateResult) => {
+                if (parkingUpdateError) {
+                  console.error('Error updating parking status:', parkingUpdateError);
+                  return res.status(500).send('Error updating parking status');
+                }
+                return res.redirect('/successful')
+              });
+            } else {
+              return res.status(200).send('No Student ID');
+            }
+          });
+        });
+      } else {
+        return res.status(404).send('Transaction not found');
+      }
+    });
+  } catch (error) {
+    console.error('Error during checkout:', error);
+    return res.status(500).send('Error during checkout');
+  }
+};
+
 
 //Routine Stuff
 

@@ -28,7 +28,7 @@ function LoggedinHome() {
               <a href="#">Parking Slot</a>
               <ul className={style["dropdown-menu"]}>
                 <li><a href="/BookParking">Book Parking Slot</a></li>
-                <li><a href="/parkingconfirm">Parking payment Slot</a></li>
+                <li><a href="/parkingbooking">Parking payment Slot</a></li>
                 <li><a href="/parkingContact">Queries</a></li>
               </ul>
             </li>
