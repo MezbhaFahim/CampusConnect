@@ -23,6 +23,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "react-router-dom": "^6.24.1"
   }
 }
