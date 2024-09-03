@@ -14,8 +14,11 @@ router.post("/parking", authController.parking)
 
 router.post("/updateUser", authController.UserUpdate)
 
-router.get('/api/courses', authController.CourseFetch)
-router.get('/api/courseShow' , authController.CourseShowRoutine)
+router.post('/api/courseSelected' , authController.CourseSelected)
+router.post("/api/removeCourse" , authController.removeCoursefromdatabase)
+router.post('/proceedToCheckout', authController.proceedToCheckout)
+
+
 
 
 //fetch ->
@@ -30,7 +33,9 @@ router.get('/parkingStatus', authController.getParkingStatus)
 router.get('/parkingInfo', authController.getParkingInfo)
 router.get('/api/getLicensePlate', authController.getLicensePlate)
 
-router.post('/api/courseSelected' , authController.CourseSelected)
-router.post("/api/removeCourse" , authController.removeCoursefromdatabase)
+router.get('/api/courses', authController.CourseFetch)
+router.get('/api/courseShow' , authController.CourseShowRoutine)
+
+
 
 module.exports = router;

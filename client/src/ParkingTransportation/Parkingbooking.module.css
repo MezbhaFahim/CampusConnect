@@ -1,0 +1,149 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./parking-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.headerRow h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+#countdown {
+    font-size: 18px;
+    color: #333;
+}
+
+.bookingForm {
+    padding: 20px;
+    width: 60%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+}
+
+.bookingForm label {
+    font-size: 15px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.bookingForm input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-transform: none;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.bookingForm input:focus {
+    border: 1px solid #000;
+}
+
+.bookingForm button {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    background: #007BFF;
+    color: #fff;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.bookingForm button:hover {
+    background: #0056b3;
+}
+
+.paymentMethodSection {
+    padding: 20px;
+    width: 60%;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+}
+
+.paymentMethodSection h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.paymentButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.paymentBtn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.paymentBtn:hover {
+    background-color: #0056b3;
+}
+
+.paymentBtn.active {
+    background-color: #0056b3;
+}
+
+.inputBox {
+    margin: 15px 0;
+}
+
+.inputBox span {
+    margin-bottom: 10px;
+    display: block;
+    font-size: 15px;
+    color: #333;
+}
+
+.inputBox input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-transform: none;
+}
+
+.inputBox input:focus {
+    border: 1px solid #000;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    background: #056114;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    background: #1fa335;
+}
