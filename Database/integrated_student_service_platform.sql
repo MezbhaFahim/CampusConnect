@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2024 at 09:53 AM
+-- Generation Time: Sep 04, 2024 at 09:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,13 @@ CREATE TABLE `comment_table` (
   `Name` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `comment_table`
+--
+
+INSERT INTO `comment_table` (`Post`, `comment`, `Name`) VALUES
+('3', 'This is a nice project.', 'Abrar Ahmed');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,27 @@ CREATE TABLE `courses` (
   `Day1` text NOT NULL,
   `Day2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`CourseName`, `Time`, `Section`, `Day1`, `Day2`) VALUES
+('CSE110', '8:00 - 9:20', 1, 'Sunday', 'Tuesday'),
+('CSE110', '9:30 - 10:50', 2, 'Monday', 'Wednesday'),
+('CSE110', '9:30 - 10:50', 3, 'Sunday', 'Tuesday'),
+('CSE111', '8:00 - 9:20', 1, 'Sunday', 'Tuesday'),
+('CSE111', '2:00 - 3:20', 2, 'Thursday', 'Saturday'),
+('CSE111', '3:30 - 5:00', 3, 'Monday', 'Wednesday'),
+('CSE220', '11:00 - 12:20', 1, 'Monday', 'Wednesday'),
+('CSE220', '12:30 - 1:50', 2, 'Monday', 'Wednesday'),
+('CSE220', '9:30 - 10:50', 3, 'Sunday', 'Tuesday'),
+('CSE221', '8:00 - 9:20', 1, 'Thursday', 'Saturday'),
+('CSE221', '9:30 - 10:50', 2, 'Monday', 'Wednesday'),
+('CSE221', '3:30 - 5:00', 3, 'Sunday', 'Tuesday'),
+('CSE470', '11:00 - 12:20', 1, 'Sunday', 'Tuesday'),
+('CSE470', '2:00 - 3:20', 2, 'Monday', 'Wednesday'),
+('CSE470', '12:30 - 1:50', 3, 'Sunday', 'Tuesday');
 
 -- --------------------------------------------------------
 
@@ -92,6 +120,28 @@ CREATE TABLE `foodcart` (
   `Bill` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `foodcart`
+--
+
+INSERT INTO `foodcart` (`FoodPicture`, `StudentID`, `FoodName`, `Quantity`, `Bill`) VALUES
+('/buger.jpg', 21301022, 'Burger', 2, 240),
+('/chocolate.jpg', 21301022, 'Chocolate', 1, 20),
+('/Hot_dog.jpg', 21301022, 'Hot Dog', 1, 80),
+('/ice_cream.jpg', 21301022, 'Ice Cream', 1, 100),
+('/biryani.webp', 21301308, 'Biryani', 1, 160),
+('/buger.jpg', 21301308, 'Burger', 2, 240),
+('/chocolate.jpg', 21301308, 'Chocolate', 1, 20),
+('/gallary_3.jpg', 21301308, 'Chocolate Cup Cake', 1, 50),
+('/chocolate_Drink.jpg', 21301308, 'Chocolate Milkshake', 1, 80),
+('/ice_cream.jpg', 21301308, 'Ice Cream', 2, 200),
+('/biryani.webp', 21301309, 'Biryani', 1, 160),
+('/buger.jpg', 21301309, 'Burger', 1, 120),
+('/chocolate.jpg', 21301309, 'Chocolate', 1, 20),
+('/gallary_3.jpg', 21301309, 'Chocolate Cup Cake', 1, 50),
+('/buger.jpg', 213013093, 'Burger', 1, 120),
+('/chocolate.jpg', 213013093, 'Chocolate', 1, 20);
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +153,13 @@ CREATE TABLE `food_place_order` (
   `grandTotal` text NOT NULL,
   `orderItems` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food_place_order`
+--
+
+INSERT INTO `food_place_order` (`StudentID`, `grandTotal`, `orderItems`) VALUES
+('21301308', '1190', 'Biryani: 1, Burger: 2, Chocolate: 1, Chocolate Cup Cake: 1, Chocolate Milkshake: 1, Ice Cream: 2 ');
 
 -- --------------------------------------------------------
 
@@ -118,6 +175,13 @@ CREATE TABLE `forum` (
   `Username` varchar(260) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`PostID`, `Title`, `Text`, `Picture`, `Username`) VALUES
+(3, 'BRACU Duburi', 'The BRACU Duburi team is committed to establishing a vibrant and inclusive community of AUV and ROV hobbyists and enthusiasts who will collaborate to develop cutting-edge, industrial-grade underwater vehicle. The team envisions fostering an environment where individuals can share their ideas, knowledge, and expertise to create innovative technologies that can revolutionize the underwater industry. Additionally, the team aspires to establish a state-of-the-art test facility that will enable the next generation of ROV enthusiasts to hone their skills and advance their knowledge in the field. Through these initiatives, the BRACU Duburi team aims to create a sustainable and innovative ecosystem that will drive the growth and development of the underwater industry in Bangladesh and beyond.', 'uploads\\6a3a2013142d403ba06c88b60cd90956', 'AmiMezbha');
+
 -- --------------------------------------------------------
 
 --
@@ -126,11 +190,20 @@ CREATE TABLE `forum` (
 
 CREATE TABLE `parking_ver1` (
   `name` varchar(50) NOT NULL,
+  `phoneNo` int(14) NOT NULL,
   `lic_plate` varchar(50) NOT NULL,
   `student_id` int(20) NOT NULL,
   `type` text NOT NULL,
   `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `parking_ver1`
+--
+
+INSERT INTO `parking_ver1` (`name`, `phoneNo`, `lic_plate`, `student_id`, `type`, `status`) VALUES
+('Abrar Ahmed', 0, 'abcd', 21301309, 'car', 'Paid'),
+('Mezbha Ul Haq', 1749750955, 'Abcd-1234', 21301308, 'bike', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -172,36 +245,40 @@ CREATE TABLE `transactions_table` (
 --
 
 INSERT INTO `transactions_table` (`student_id`, `transactions`) VALUES
-(NULL, '02650187167'),
-(NULL, '07417927689'),
-(NULL, '09181822938'),
-(NULL, '14496164968'),
-(NULL, '14803025605'),
-(NULL, '15702518649'),
-(NULL, '23433893940'),
-(NULL, '30607995885'),
-(NULL, '33131995641'),
-(NULL, '33210819059'),
-(NULL, '36237514239'),
-(NULL, '42199931612'),
-(NULL, '46871538410'),
-(NULL, '48039362996'),
-(NULL, '49197682504'),
-(NULL, '54351784339'),
-(NULL, '55176209057'),
-(NULL, '59284032284'),
-(NULL, '64682214301'),
-(NULL, '68553490162'),
-(NULL, '71333243578'),
-(NULL, '75532271131'),
-(NULL, '75658081821'),
-(NULL, '83129395156'),
-(NULL, '83617498524'),
-(NULL, '92371296689'),
-(NULL, '94717128197'),
-(NULL, '95790513042'),
-(NULL, '97899430056'),
-(NULL, '99663919582');
+(NULL, '39084172657'),
+(NULL, '41205227692'),
+(NULL, '42872774640'),
+(NULL, '43834415118'),
+(NULL, '44357104733'),
+(NULL, '44625455554'),
+(NULL, '47746644958'),
+(NULL, '48669740602'),
+(NULL, '49200422362'),
+(NULL, '54148278435'),
+(NULL, '55539353336'),
+(NULL, '56509220838'),
+(NULL, '60173150207'),
+(NULL, '61211146470'),
+(NULL, '65642068781'),
+(NULL, '70539625705'),
+(NULL, '71753277323'),
+(NULL, '73821043570'),
+(NULL, '75282383127'),
+(NULL, '76513688709'),
+(NULL, '79726114476'),
+(NULL, '80025335661'),
+(NULL, '81157398205'),
+(NULL, '82888342516'),
+(NULL, '84888273648'),
+(NULL, '86093165525'),
+(NULL, '88748724467'),
+(NULL, '94016867962'),
+(NULL, '96420201002'),
+(NULL, '97337087333'),
+(NULL, '98669280854'),
+(NULL, '99795506893'),
+(21301308, '32347792137'),
+(21301309, '33623914265');
 
 -- --------------------------------------------------------
 
@@ -223,8 +300,8 @@ CREATE TABLE `transportation` (
 --
 
 INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `SeatPaid`, `SeatBooked`) VALUES
-('Going', '6:30', 2, 1, 0, NULL),
-('Going', '6:30', 3, 1, 0, NULL),
+('Going', '6:30', 2, 0, 1, 'AmiMezbha'),
+('Going', '6:30', 3, 0, 1, 'PhantomN3rd'),
 ('Going', '6:30', 4, 1, 0, NULL),
 ('Going', '6:30', 5, 1, 0, NULL),
 ('Going', '6:30', 6, 1, 0, NULL),
@@ -242,7 +319,7 @@ INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `
 ('Going', '6:30', 18, 1, 0, NULL),
 ('Going', '6:30', 19, 1, 0, NULL),
 ('Going', '6:30', 20, 1, 0, NULL),
-('Returning', '5:00', 1, 1, 0, NULL),
+('Returning', '5:00', 1, 0, 1, 'AmiMezbha'),
 ('Returning', '5:00', 2, 1, 0, NULL),
 ('Returning', '5:00', 3, 1, 0, NULL),
 ('Returning', '5:00', 4, 1, 0, NULL),
@@ -275,6 +352,7 @@ CREATE TABLE `user` (
   `StudentName` varchar(100) NOT NULL,
   `Email` varchar(62) NOT NULL,
   `Grade` float NOT NULL,
+  `Phone` int(20) NOT NULL,
   `Password` text NOT NULL,
   `Token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -283,8 +361,12 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Password`, `Token`) VALUES
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrargroad2000@gmail.com', 0, '$2b$08$xisZGdVqb1cUpMznS2uMAOnbWVTWmcLexUFRLaQEQ0AVwnChDUIOC', 't4hkp7xxjqd');
+INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
+(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'ppaf2ew7eg'),
+(21301123, 'Check', 'Abrar Ahmed', 'abrargroad2000@Gmail.com', 0, 0, '$2b$08$Zu1CtYZtKCmwLEfbOKvDueJ7LKmhAYyrG/tkbJe9bqKRNRpvFYWWm', 'g8t7vdukiok'),
+(21301308, 'AmiMezbha', 'Mezbha Ul Haq', 'mezbha.ul.haque@gmail.com', 0, 1749750965, '$2b$08$B6JCj4JkIlthd1ZfagRmD.oGkUZfC6AK95JVqD1R/g5GFlGAGw.ae', 'ugf08pgcsv'),
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '2okbim8hpo3'),
+(213013093, 'test', 'test', 'test@test.com', 0, 2147483647, '$2b$08$lNe6DYR.RxqeTsmVdAKbGenQuMdu4CS5coSIzkoeVEFcaOD1a5/vm', '10iio9jkttmn');
 
 -- --------------------------------------------------------
 
@@ -297,6 +379,15 @@ CREATE TABLE `usercoursetable` (
   `CourseName` varchar(64) NOT NULL,
   `CourseSection` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usercoursetable`
+--
+
+INSERT INTO `usercoursetable` (`Username`, `CourseName`, `CourseSection`) VALUES
+('AmiMezbha', 'CSE110', 1),
+('AmiMezbha', 'CSE111', 1),
+('AmiMezbha', 'CSE470', 1);
 
 --
 -- Indexes for dumped tables
@@ -369,6 +460,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`StudentID`),
   ADD UNIQUE KEY `Email` (`Email`),
   ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Phone` (`Phone`),
   ADD UNIQUE KEY `Token` (`Token`) USING HASH;
 
 --
@@ -385,7 +477,7 @@ ALTER TABLE `usercoursetable`
 -- AUTO_INCREMENT for table `forum`
 --
 ALTER TABLE `forum`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
