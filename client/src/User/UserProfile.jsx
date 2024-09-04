@@ -41,10 +41,10 @@ function UserProfile() {
           <a href="/userProfile" className={style.active}>
             <i className="fa fa-user"></i>
           </a>
-          <a href="/homepage">
+          <a href="/Home">
             <i className="fa fa-home" aria-hidden="true"></i>
           </a>
-          <a href="#">
+          <a href="/Routine">
             <i className="fa fa-calendar" aria-hidden="true"></i>
           </a>
           <a href="/userUpdate">
