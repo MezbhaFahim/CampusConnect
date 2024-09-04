@@ -1,0 +1,151 @@
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./contact.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: black;
+  margin: 0; /* Ensure there's no default margin on the body */
+  padding: 0; /* Ensure there's no default padding on the body */
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 60px;
+  margin-left: 180px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);/* Transparent whitish background */
+  align-items: center;
+  align-content: center;
+   
+}
+
+h1 {
+  color: black !important;
+  margin-top: 80px;
+  margin-left: 5 px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start; /* Align items at the start to make sure they are at the top */
+  justify-content: center;
+}
+
+.col {
+  flex: 1;
+}
+
+.left {
+  flex-basis: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align content to the left */
+}
+
+.right {
+  flex-basis: 45%;
+}
+
+.contactTitle {
+  margin-bottom: 20px;
+  text-align: left; /* Align text to the left */
+}
+
+.contactTitle h2 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.contactTitle p {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.contactInfo {
+  margin-bottom: 20px;
+}
+
+.iconGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.details span {
+  display: block;
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.socialMedia a {
+  font-size: 1.2em;
+  color: #2b2b2b;
+  margin-right: 15px;
+}
+
+.messageForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  align-self:self-start;
+  align-items: self-start;
+  margin-top: 120px;
+}
+
+.inputGroup {
+  position: relative;
+  width: 100%;
+  margin-top: 2px; /* Ensure space between input groups */
+}
+
+
+.halfWidth {
+  width: 48%;
+  gap:10px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items:flex-start;
+}
+
+
+
+label {
+  position: block;
+  padding: 0 5px;
+  margin-top: 5px;
+  color: black;
+}
+
+button {
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}

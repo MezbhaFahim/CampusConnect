@@ -131,10 +131,11 @@ header .navbar {
   cursor: pointer;
   font-weight: 500;
   transition: 0.2s ease;
+  color: black;
 }
 
 .hero-section .content button:hover {
-  color: #fff;
+  color: black;
   background: #62d7ec;
 }
 
@@ -147,7 +148,7 @@ header .navbar {
 }
 
 #hamburger-btn {
-  color: #fff;
+  color: black;
   cursor: pointer;
   display: none;
 }
