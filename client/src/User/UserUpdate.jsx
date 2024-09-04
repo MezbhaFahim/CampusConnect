@@ -9,7 +9,6 @@ function UserUpdate() {
     StudentID: '',
     Username: '',
     Email: '',
-    Phone: ''
   });
 
   const openPopup = () => {
@@ -40,6 +39,21 @@ function UserUpdate() {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/auth/updateUser', {
+        fullName: userData.StudentName,
+        studentID: userData.StudentID,
+        username: userData.Username,
+        email: userData.Email
+      });
+      console.log('User updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
+  }; 
+
   return (
     <div className={style.container}>
       <div className={`${style.popup} ${isPopupActive ? style.active : ''}`}>
@@ -55,10 +69,10 @@ function UserUpdate() {
           <a href="/userProfile" className={style.active}>
             <i className="fa fa-user"></i>
           </a>
-          <a href="/homepage">
+          <a href="/Home">
             <i className="fa fa-home" aria-hidden="true"></i>
           </a>
-          <a href="/routine">
+          <a href="/Routine">
             <i className="fa fa-calendar" aria-hidden="true"></i>
           </a>
           <a href="/userUpdate">
@@ -72,7 +86,7 @@ function UserUpdate() {
 
       <div className={style.rightbox}>
         <div className={style.profile}>
-          <form action="/auth/updateUser" method="POST">
+          <form onSubmit={handleSubmit}>
             <h1>Personal Info</h1>
             <h2>Full Name</h2>
             <input
@@ -107,12 +121,10 @@ function UserUpdate() {
               onChange={handleChange}
             />
             <br />
-            <button className={style.btn} id="updateBtn">Update</button>
+            <button className={style.btn} id="updateBtn" type="submit">Update</button>
           </form>
         </div>
       </div>
-
-      
     </div>
   );
 }

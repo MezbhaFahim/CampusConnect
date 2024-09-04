@@ -42,11 +42,10 @@ const ParkingBooking = () => {
 
     const fetchLicensePlate = async (studentId) => {
         try {
-            const response = await axios.get('/auth/getLicensePlate', {
-                params: { studentId }
-            });
-            console.log("License Plate Response:", response.data); // Log the full response
-            setLicensePlate(response.data.licensePlate || ''); // Ensure licensePlate is set properly
+            const response = await axios.get('/auth/getLicensePlate', {params: { studentId }});
+            const data = response.data;
+            console.log("License Plate Response:", response.data); 
+            setLicensePlate(response.data.licensePlate || ''); 
         } catch (error) {
             console.error('Error fetching license plate:', error);
         }
@@ -88,6 +87,7 @@ const ParkingBooking = () => {
                         id="phone"
                         value={userData?.Phone || ''}
                         onChange={(e) => setUserData({ ...userData, Phone: e.target.value })}
+                        readonly
                     />
 
                     <label htmlFor="licensePlate">License Plate:</label>

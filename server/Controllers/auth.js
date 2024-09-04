@@ -14,7 +14,7 @@ exports.GetUserData = (req, res) => {
   
     const userId = req.session.user.StudentID;
   
-    db.query('SELECT StudentID, Username, StudentName, Email FROM user WHERE StudentID = ?', [userId], (error, results) => {
+    db.query('SELECT StudentID, Username, StudentName, Email, Phone FROM user WHERE StudentID = ?', [userId], (error, results) => {
       if (error) {
         console.error('Database error:', error);
         return res.status(500).send('Internal server error');
@@ -108,41 +108,29 @@ exports.UserLogin = (req, res) => {
     });
 };
 
+
+    
 exports.UserUpdate = async (req, res) => {
-    const { fullName, studentID, username, email} = req.body;
-    const userId = req.session.user.StudentID;
-  
-    if (!req.session.user) {
+  if (!req.session.user) {
       return res.status(401).send('User not logged in.');
-    } else{
-        console.log(`studentID type: ${typeof studentID}`);
-      console.log(studentID)
-      console.log(userId.toString())
-      if (studentID === userId.toString()) {
-  
-        
-        db.query('UPDATE user SET StudentName = ?, Email = ? WHERE StudentID = ?', [fullName, email, studentID], (error, results) => {
-          if (error) {
-            console.error('Database error:', error);
-            return res.status(500).send({
-              success: false,
-              message: 'Internal server error',
-            });
-          } else {
-            if (results.affectedRows === 0) {
-              return res.status(404).send({
-                success: false,
-                message: 'User not found.',
-              });
-            }
-            res.redirect('/UserProfile');
-          }
-        });
-      } else {
-        res.redirect('/UserProfile');
-      } 
-    }
   }
+
+  const { fullName, studentID, username, email} = req.body;
+  const userId = req.session.user.StudentID;
+
+  db.query('UPDATE user SET StudentName = ?, Email = ? WHERE StudentID = ?', [fullName, email, userId], (error, results) => {
+      if (error) {
+          console.error('Database error:', error);
+          return res.status(500).send({ success: false, message: 'Internal server error' });
+      }
+
+      if (results.affectedRows === 0) {
+          return res.status(404).send({ success: false, message: 'User not found.' });
+      }
+      res.redirect('/UserProfile');
+  });
+};
+  
 
 exports.Logout = (req, res) => {
     req.session.destroy(err => {
@@ -273,7 +261,7 @@ exports.parking = (req, res) => {
                   console.error('Error booking parking:', insertError);
                   return res.status(500).send('Internal Server Error');
               }
-              res.redirect('/Home')
+              res.redirect('/ParkingBooking')
           }
       );
   });
@@ -344,6 +332,7 @@ exports.getParkingInfo = async (req, res) => {
 exports.proceedToCheckout = async (req, res) => {
 
   const { transactionID, studentID } = req.body;
+  console.log(transactionID)
   try {
 
     db.query('SELECT * FROM transactions_table WHERE transactions = ?', [transactionID], (error, result) => {
@@ -373,7 +362,7 @@ exports.proceedToCheckout = async (req, res) => {
                   console.error('Error updating parking status:', parkingUpdateError);
                   return res.status(500).send('Error updating parking status');
                 }
-                return res.redirect('/successful')
+                return res.redirect('/BookParking')
               });
             } else {
               return res.status(200).send('No Student ID');

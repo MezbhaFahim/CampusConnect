@@ -28,7 +28,7 @@ function BusRoutes() {
         <div>
           <h1 className={style.introduction}>
             <span className={style["introduction-text"]}>Brac University Bus Routes <i className="fa-solid fa-route"></i></span>
-            <button className={style["custom-button"]} onClick={() => window.location.href = '/'}>CampusConnect</button>
+            <button className={style["custom-button"]} onClick={() => window.location.href = '/Home'}>CampusConnect</button>
           </h1>
         </div>
 

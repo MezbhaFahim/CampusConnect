@@ -31,7 +31,7 @@ router.get("/api/fetchroutes", authController.BusRoutes)
 router.get('/api/busSeatAvailability' , authController.BusSeatAvailability)
 router.get('/parkingStatus', authController.getParkingStatus)
 router.get('/parkingInfo', authController.getParkingInfo)
-router.get('/api/getLicensePlate', authController.getLicensePlate)
+router.get('/getLicensePlate', authController.getLicensePlate)
 
 router.get('/api/courses', authController.CourseFetch)
 router.get('/api/courseShow' , authController.CourseShowRoutine)
