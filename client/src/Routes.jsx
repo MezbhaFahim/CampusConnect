@@ -13,6 +13,8 @@ import UserProfile from './User/UserProfile';
 import UserUpdate from './User/UserUpdate';
 import ParkingBooking from './ParkingTransportation/Parkingbooking';
 
+import ParkingContact from './ParkingTransportation/ParkingContact';
+
 
 
 
@@ -33,6 +35,7 @@ function AppRoutes() {
         <Route path="/BookParking" element={<BookParking />} />
         <Route path="/Routine" element={<Routine />} />
         <Route path="/ParkingBooking" element={<ParkingBooking />} />
+        <Route path="/ParkingContact" element={<ParkingContact />} />
 
 
 

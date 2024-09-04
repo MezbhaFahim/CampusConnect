@@ -139,6 +139,7 @@ header .navbar {
   cursor: pointer;
   font-weight: 500;
   transition: 0.2s ease;
+  color:black;
 }
 
 .hero-section .content button:hover {
