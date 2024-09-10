@@ -204,6 +204,7 @@ form.sign-in-form {
 .panel .content {
   color: white;
   transition: 0.9s 0.6s ease-in-out;
+  padding-right: 12%;
 }
 
 .panel h3 {
@@ -233,6 +234,10 @@ form.sign-in-form {
 .btn.transparent:hover {
   color: #464646;
   border-color: #464646;
+}
+
+.right-panel .content {
+  padding-left: 12%; 
 }
 
 .right-panel .content,
@@ -322,7 +327,7 @@ form.sign-in-form {
   }
 
   .panel h3 {
-    font-size: 19.2px;
+    font-size: 10px;
   }
 
   .panel p {
@@ -381,9 +386,6 @@ form.sign-in-form {
     display: none;
   }
 
-  .panel .content {
-    padding: 8px 16px;
-  }
 
   .container:before {
     bottom: 72%;
@@ -395,6 +397,9 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+
+
 
 
 

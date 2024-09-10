@@ -14,6 +14,14 @@ function UserProfile() {
     setIsPopupActive(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.get('/auth/logout');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,13 +34,14 @@ function UserProfile() {
     fetchData();
   }, []);
 
+
   return (
     <div className={style.container}>
       <div className={`${style.popup} ${isPopupActive ? style.active : ''}`}>
         <div className={style.closeBtn} onClick={closePopup}>&times;</div>
         <div className={style.form}>
           <h2>Are you sure you want to log out?</h2>
-          <button className={style.btn2} id="logoutButton">Logout</button>
+          <button className={style.btn2} id="logoutButton" onClick={handleLogout}>Logout</button>
         </div>
       </div>
 
