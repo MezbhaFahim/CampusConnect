@@ -9,22 +9,22 @@
   --yellow: #ffa41b;
   --green: #539165;
 }
+
+
 .container {
-  height: 100%;
+  position: relative;
   width: 100%;
+  max-width: 1200px;
+  min-height: 100vh; /* Ensure it covers the entire viewport height */
+  margin: 0 auto;
   background-image: linear-gradient(rgba(138, 138, 138, 0.5), rgba(120, 120, 120, 0.5)), url("./bracubus.svg");
-  background-size:cover;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-bottom: 0px;
-  margin-right: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  background-attachment: local; /* Adjust this property if 'fixed' causes issues */
 }
+
+
 * {
   margin: 0px;
   padding: 0px;
@@ -32,14 +32,16 @@
   font-family: "Poppins", sans-serif;
 }
 
+
 body {
-  background-image: linear-gradient(rgba(138, 138, 138, 0.5), rgba(120, 120, 120, 0.5)), url("./contact.svg");
-  background-size:cover;
+  
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
-  overflow-y: scroll !important;
+  background-attachment: local; /* Use 'local' if 'fixed' causes issues */
+  background: none;
 }
+
+
 
 .introduction {
   display: flex;
@@ -93,12 +95,6 @@ body {
   color: white;
 }
   
-.container {
-  position: relative;
-  max-width: 1200px;
-  height: fit-content;
-  margin: 0px auto;
-}
 
 .box {
   position: relative;

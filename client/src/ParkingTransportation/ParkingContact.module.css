@@ -5,8 +5,8 @@ body {
   background-position: center;
   background-attachment: fixed;
   color: black;
-  margin: 0; /* Ensure there's no default margin on the body */
-  padding: 0; /* Ensure there's no default padding on the body */
+  margin: 0; 
+  padding: 0; 
 }
 
 .container {
@@ -18,7 +18,7 @@ body {
   margin-right: 20px;
   padding: 20px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.8);/* Transparent whitish background */
+  background-color: rgba(255, 255, 255, 0.8);
   align-items: center;
   align-content: center;
    
@@ -34,7 +34,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  align-items: flex-start; /* Align items at the start to make sure they are at the top */
+  align-items: flex-start; 
   justify-content: center;
 }
 
@@ -46,7 +46,7 @@ h1 {
   flex-basis: 45%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align content to the left */
+  align-items: flex-start; 
 }
 
 .right {
@@ -55,7 +55,7 @@ h1 {
 
 .contactTitle {
   margin-bottom: 20px;
-  text-align: left; /* Align text to the left */
+  text-align: left; 
 }
 
 .contactTitle h2 {

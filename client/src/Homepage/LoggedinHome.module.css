@@ -40,7 +40,7 @@ header .navbar {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 10px;
+  gap: 140px;
   margin: 0;
   padding: 0;
 }

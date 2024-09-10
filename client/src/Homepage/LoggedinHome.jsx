@@ -11,10 +11,7 @@ function LoggedinHome() {
           <a className={style["logo"]} href="#">CampusConnect<span>.</span></a>
           <ul className={style["menu-links"]}>
             <li>
-              <a href="#">Routine</a>
-            </li>
-            <li>
-              <a href="#">Cafetaria</a>
+              <a href="/Routine">Routine</a>
             </li>
             <li>
               <a href="#">Transportation</a>
@@ -31,9 +28,6 @@ function LoggedinHome() {
                 <li><a href="/Parkingbooking">Parking payment Slot</a></li>
                 <li><a href="/ParkingContact">Queries</a></li>
               </ul>
-            </li>
-            <li>
-              <a href="#">Student Forum</a>
             </li>
             <li>
               <a href="/UserProfile">MyProfile</a>

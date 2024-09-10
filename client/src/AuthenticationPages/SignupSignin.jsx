@@ -30,21 +30,6 @@ function SignupSignin() {
                 <input type="password" name="Password" placeholder="Password" />
               </div>
               <input type="submit" value="Login" className={`${style["btn"]} ${style["solid"]}`} />
-              <p className={style["social-text"]}>Or Sign in with social platforms</p>
-              <div className={style["social-media"]}>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-google"></i>
-                </a>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
             </form>
             <form action="/auth/signup" className={style["sign-up-form"]} method="POST">
               <h2 className={style["title"]}>Sign Up</h2>
@@ -69,21 +54,6 @@ function SignupSignin() {
                 <input type="password" name="Password" placeholder="Password" />
               </div>
               <input type="submit" value="Sign up" className={`${style["btn"]} ${style["solid"]}`} />
-              <p className={style["social-text"]}>Or sign up with social platforms</p>
-              <div className={style["social-media"]}>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-google"></i>
-                </a>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className={style["social-icon"]}>
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
             </form>
           </div>
         </div>
