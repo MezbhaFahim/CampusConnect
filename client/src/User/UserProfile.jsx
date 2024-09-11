@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import style from './UserProfile.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function UserProfile() {
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
 
   const openPopup = () => {
     setIsPopupActive(true);
@@ -17,6 +19,7 @@ function UserProfile() {
   const handleLogout = async () => {
     try {
       await axios.get('/auth/logout');
+      navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);
     }

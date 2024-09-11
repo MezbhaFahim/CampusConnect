@@ -8,25 +8,19 @@ import BusBook from './ParkingTransportation/BusBooking';
 import BusTicket from './ParkingTransportation/BusTicket';
 import BookParking from './ParkingTransportation/BookParking';
 import Routine from './Routine/Routine';
-
 import UserProfile from './User/UserProfile';
 import UserUpdate from './User/UserUpdate';
 import ParkingBooking from './ParkingTransportation/Parkingbooking';
-
 import ParkingContact from './ParkingTransportation/ParkingContact';
-
-
-
-
-
 
 function AppRoutes() {
   return (
     <Router>
       <Routes>
+
         <Route path="/" element={<Homepage />} />
-        <Route path="/SignupSignin" element={<SignupSignin />} />
         <Route path="/Home" element={<LoggedinHome />} />
+        <Route path="/SignupSignin" element={<SignupSignin />} />
         <Route path="/BusRoutes" element={<BusRoutes />} />
         <Route path="/BusBook" element={<BusBook />} />
         <Route path="/BusTicket" element={<BusTicket />} />
@@ -37,10 +31,6 @@ function AppRoutes() {
         <Route path="/ParkingBooking" element={<ParkingBooking />} />
         <Route path="/ParkingContact" element={<ParkingContact />} />
 
-
-
-
-        
       </Routes>
     </Router>
   );

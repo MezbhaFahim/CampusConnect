@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import style from './UserProfile.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function UserUpdate() {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await axios.get('/auth/logout');
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+  
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [userData, setUserData] = useState({
     StudentName: '',
@@ -60,7 +71,7 @@ function UserUpdate() {
         <div className={style.closeBtn} onClick={closePopup}>&times;</div>
         <div className={style.form}>
           <h2>Are you sure you want to log out?</h2>
-          <button className={style.btn2} id="logoutButton" href="/">Logout</button>
+          <button className={style.btn2} id="logoutButton" onClick={handleLogout}>Logout</button>
         </div>
       </div>
 

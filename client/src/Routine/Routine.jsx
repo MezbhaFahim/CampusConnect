@@ -4,14 +4,14 @@ import styles from "./Routine.module.css";
 
 function Routine() {
   useEffect(() => {
-    courseShow(); // Load courses when component mounts
+    courseShow(); 
   }, []);
 
-  // Function to search courses based on input
   const showSearchResults = async () => {
     try {
       const response = await axios.get("/auth/api/courses");
       const courses = response.data;
+
       const searchInput = document.getElementById("course-search");
       const searchQuery = searchInput.value.toLowerCase();
 
@@ -49,11 +49,10 @@ function Routine() {
     }
   };
 
-  // Function to send selected course data to the server
   const sendCourseData = async (course) => {
     try {
       await axios.post("/auth/api/courseSelected", { courseDetails: course });
-      courseShow(); // Refresh courses after adding a new one
+      window.location.reload();
     } catch (error) {
       if (error.response.status === 401) {
         alert("You are not logged in. Please log in to continue.");
@@ -65,14 +64,13 @@ function Routine() {
     }
   };
 
-  // Function to fetch and show added courses
   const courseShow = async () => {
     try {
       const response = await axios.get("/auth/api/courseShow");
       const courseTaken = response.data;
       renderCoursesInRoutineTable(courseTaken);
       const addedCoursesList = document.getElementById("added-courses-list");
-      addedCoursesList.innerHTML = ""; // Clear previous list
+      addedCoursesList.innerHTML = ""; 
 
       courseTaken.forEach((courseList) => {
         courseList.forEach((course) => {
@@ -98,17 +96,15 @@ function Routine() {
     }
   };
 
-  // Function to remove a course from the routine
   const removeCourse = async (courseName, section) => {
     try {
       await axios.post("/auth/api/removeCourse", { courseName, section });
-      courseShow(); // Refresh the table after removal
+      window.location.reload();
     } catch (error) {
       console.error("Error removing course:", error);
     }
   };
 
-  // Function to render courses in the routine table
   const renderCoursesInRoutineTable = (courses) => {
     courses.forEach((courseArray) => {
       courseArray.forEach((course) => {
@@ -135,7 +131,6 @@ function Routine() {
     });
   };
 
-  // Helper function to find the correct table cell for the course based on time and day
   const getTableCell = (Time, Day) => {
     switch (Day) {
       case "Sunday":
@@ -146,7 +141,27 @@ function Routine() {
         return document.querySelector(
           `td[data-time="${Time}"] + td + td[data-day="Monday"]`
         );
-      // Similarly handle other days of the week
+      case "Tuesday":
+        return document.querySelector(
+          `td[data-time="${Time}"] + td + td + td[data-day="Tuesday"]`
+        );
+      case "Wednesday":
+        return document.querySelector(
+          `td[data-time="${Time}"] + td + td + td + td[data-day="Wednesday"]`
+        );
+        case "Thursday":
+      return document.querySelector(
+        `td[data-time="${Time}"] + td + td + td + td + td[data-day="Thursday"]`
+      );
+      case "Friday":
+      return document.querySelector(
+        `td[data-time="${Time}"] + td + td + td + td + td + td[data-day="Friday"]`
+      );
+      case "Saturday":
+      return document.querySelector(
+        `td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="Saturday"]`
+      );
+
       default:
         return null;
     }

@@ -2,8 +2,10 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 
 const generateSessionToken = () => {
+
     const randomString = Math.random().toString(36).substring(2, 15);
     return randomString;
+
 };
 
 exports.GetUserData = (req, res) => {
@@ -27,6 +29,7 @@ exports.GetUserData = (req, res) => {
       const userData = results;
       res.send(userData);
     });
+
   };
 
 exports.UserSignup = async (req, res) => {
@@ -106,11 +109,13 @@ exports.UserLogin = (req, res) => {
           }
       }
     });
+
 };
 
 
     
 exports.UserUpdate = async (req, res) => {
+
   if (!req.session.user) {
       return res.status(401).send('User not logged in.');
   }
@@ -129,25 +134,25 @@ exports.UserUpdate = async (req, res) => {
       }
       res.redirect('/UserProfile');
   });
+
 };
   
-
 exports.Logout = (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            console.error('Error destroying session:', err);
-            res.status(500).send('Internal server error');
-        }
-        res.redirect('/SignupSignin');
 
-    });
-}
-
+  req.session.destroy(err => {
+      if (err) {
+          console.error('Error destroying session:', err);
+          res.status(500).send('Internal server error');
+      } else {
+          res.redirect('/'); 
+      }
+  });
+  
+};
 
 exports.BusRoutes = (req, res) => {
 
   db.query('SELECT * FROM routes', (error, results) => {
-
     if (error) {
       return res.status(500).send('Internal server error');
     }
@@ -160,15 +165,12 @@ exports.bookTicket = (req, res) => {
 
   const { studentID, email, goingFrom, goingTo, number, time } = req.body;
   const loggedInUser = req.session.user;
-
   const busType = goingFrom === '1' ? 'Going' : 'Returning';
 
   db.query('SELECT * FROM transportation WHERE FIND_IN_SET(?, SeatBooked) > 0 AND BusType = ?', [loggedInUser.Username.toString(), busType], (error, result) => {
-
     if (error) {
       return res.status(500).send('Internal server error');
     }
-
     if (result.length > 0) {
       return res.status(400).send('You have already booked a seat.');
     } else {
@@ -193,6 +195,7 @@ exports.bookTicket = (req, res) => {
       });
     }
   });
+
 };
 
 exports.BusSeatAvailability = (req, res) => {
@@ -216,14 +219,13 @@ exports.BusSeatAvailability = (req, res) => {
 
     });
   });
+
 };
 
 exports.busTicket = (req, res) => {
   
   const { fullName, studentID, email, time, transaction } = req.body;
   const loggedInUser = req.session.user;
-
-
   const BusType = time === '1' ? 'Going' : 'Returning';
 
   db.query('UPDATE transportation SET SeatPaid = 1 WHERE BusType = ? AND SeatBooked = ?', [BusType, loggedInUser.Username], (error, result) => {
@@ -236,9 +238,11 @@ exports.busTicket = (req, res) => {
       res.status(400).send('No matching seat found')
     }
   })
+
 }
 
 exports.parking = (req, res) => {
+
   const { name, phoneNo, lic_plate, type } = req.body; 
   const loggedInUser = req.session.user;
 
@@ -265,11 +269,11 @@ exports.parking = (req, res) => {
           }
       );
   });
+  
 };
 
-// Backend logging
-
 exports.getLicensePlate = (req, res) => {
+
   const { studentId } = req.query;
   const query = 'SELECT lic_plate FROM parking_ver1 WHERE student_id = ?';
 
@@ -286,16 +290,13 @@ exports.getLicensePlate = (req, res) => {
       console.log('License Plate from DB:', licensePlate); 
       res.json({ licensePlate }); 
   });
+
 };
-
-
-
 
 exports.getParkingStatus = async (req, res) => {
 
   try {
       const query = `SELECT COUNT(CASE WHEN student_id IS NULL THEN 1 END) AS availableSpace, COUNT(CASE WHEN student_id IS NOT NULL THEN 1 END) AS parkedCars FROM transactions_table`;
-      
       db.query(query, (error, results) => {
           if (error) {
               console.error('Error fetching parking status:', error);
@@ -308,6 +309,7 @@ exports.getParkingStatus = async (req, res) => {
       console.error('Error fetching parking status:', error);
       res.status(500).send('Internal server error');
   }
+
 };
 
 exports.getParkingInfo = async (req, res) => {
@@ -326,36 +328,30 @@ exports.getParkingInfo = async (req, res) => {
       console.error('Error fetching parking info:', error);
       res.status(500).send('Internal server error');
   }
-};
 
+};
 
 exports.proceedToCheckout = async (req, res) => {
 
   const { transactionID, studentID } = req.body;
-  console.log(transactionID)
+
   try {
-
     db.query('SELECT * FROM transactions_table WHERE transactions = ?', [transactionID], (error, result) => {
-
       if (error) {
         console.error('Error during checkout:', error);
         return res.status(500).send('Error during checkout');
       }
-
       if (result.length > 0) {
-
         db.query('UPDATE transactions_table SET student_id = ? WHERE transactions = ?', [studentID, transactionID], (updateError, updateResult) => {
           if (updateError) {
             console.error('Error during update:', updateError);
             return res.status(500).send('Error during update');
           }
-
           db.query('SELECT * FROM parking_ver1 WHERE student_id = ?', [studentID], (parkingError, parkingResult) => {
             if (parkingError) {
               console.error('Error fetching parking details:', parkingError);
               return res.status(500).send('Error fetching parking details');
             }
-
             if (parkingResult.length > 0) {
               db.query('UPDATE parking_ver1 SET status = "Paid" WHERE student_id = ?', [studentID], (parkingUpdateError, parkingUpdateResult) => {
                 if (parkingUpdateError) {
@@ -377,12 +373,11 @@ exports.proceedToCheckout = async (req, res) => {
     console.error('Error during checkout:', error);
     return res.status(500).send('Error during checkout');
   }
+
 };
 
-
-//Routine Stuff
-
 exports.CourseFetch = async (req, res) => {
+
   db.query('SELECT CourseName, Time, Section, Day1, Day2 FROM courses', (error, results) => {
 
     if (error) {
@@ -398,13 +393,16 @@ exports.CourseFetch = async (req, res) => {
     res.send(userData);
 
   });
+
 };
 
 exports.CourseSelected = async (req, res) => {
+
   try {
     if (!req.session.user || !req.session.user.Username) {
       return res.status(401).send("User is not logged in");
     }
+    
     const { courseDetails } = req.body;
     const username = req.session.user.Username;
 
@@ -432,24 +430,28 @@ exports.CourseSelected = async (req, res) => {
     console.error("Error in CourseSelected:", error);
     return res.status(500).send("Internal server error");
   }
+
 };
 
 exports.removeCoursefromdatabase = async(req, res) => {
+
   const courseDescription = req.body
   const courseName = courseDescription.courseName
   const courseSection = courseDescription.section
   const username = req.session.user.Username;
+
   db.query( `DELETE FROM usercoursetable WHERE Username = ? AND CourseName = ? AND CourseSection = ?` , [username, courseName, courseSection], (error, results) => {
     if (error) {
         return res.status(500).send('Internal server error');
     } else {
       res.redirect('/Routine')
     }
-  
   });
+
 }
 
 exports.CourseShowRoutine = async (req, res) => {
+
   try {
     if (!req.session.user || !req.session.user.Username) {
       return res.status(401).send("User is not logged in");
@@ -489,5 +491,6 @@ exports.CourseShowRoutine = async (req, res) => {
   } catch (error) {
     console.error("Error in CourseShowRoutine:", error);
     return res.status(500).send("Internal server error");
+    
   }
 };
